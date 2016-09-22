@@ -2,8 +2,8 @@ const request = require('request').defaults({
     'proxy' : 'http://localhost:8888'
 });
 const _ = require('lodash');
-const csv = require('csv');
-var stringifier = csv.stringify();
+const csvGenerator = require('csv').generate;
+
 
 let getEvents = function(req){
     request.post(req, handleResponse);

@@ -4,13 +4,17 @@
   "description": "scrapes some stuff",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mohca "
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "csv": "^1.1.0",
+    "json2csv": "^3.7.0",
     "lodash": "^4.16.1",
     "request": "^2.75.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2"
   }
 }

@@ -2,10 +2,13 @@ const _ = require('lodash');
 const request = require('request').defaults({
     //'proxy' : 'http://localhost:8888'
 });
+const csvGenerator = require('json2csv');
+const fs = require('fs');
+const fields = ['id', 'date', 'artists', 'location', 'venue'];
 
 
-
-
+let now = new Date();
+const filename = `./output/${now.getFullYear()}${(now.getMonth() + 1)}${now.getDay()}${now.getTime()}.csv`;
 
 let getEvents = function (req) {
     request.post(req, handleResponse);
@@ -33,16 +36,18 @@ let handleResponse = (err, resp, body) => {
 
         console.log('scraping page: ' + requestData.form.page);
         eventData.events.forEach((e) => {
+            var csvOptions = {data: e, fields: fields, hasCSVColumnTitle : false};
+            var csv = csvGenerator(csvOptions) + "\r\n";
 
-
-
-            console.log(e);
-            // Todo generate each record to a csv
-
+            fs.appendFile(filename, csv, function (err) {
+                if (err) {
+                    throw err;
+                }
+            });
         });
 
         /*requestData.form.page = requestData.form.page + 1;
-        getEvents(requestData);*/
+         getEvents(requestData);*/
     }
 };
 

@@ -36,7 +36,7 @@ let handleResponse = (err, resp, body) => {
 
         console.log('scraping page: ' + requestData.form.page);
         eventData.events.forEach((e) => {
-            var csvOptions = {data: e, fields: fields, hasCSVColumnTitle : false};
+            var csvOptions = {data: e, fields: fields, hasCSVColumnTitle: false};
             var csv = csvGenerator(csvOptions) + "\r\n";
 
             fs.appendFile(filename, csv, function (err) {
@@ -46,8 +46,8 @@ let handleResponse = (err, resp, body) => {
             });
         });
 
-        /*requestData.form.page = requestData.form.page + 1;
-         getEvents(requestData);*/
+        requestData.form.page = requestData.form.page + 1;
+        getEvents(requestData);
     }
 };
 
